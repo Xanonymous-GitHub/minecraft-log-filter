@@ -10,15 +10,6 @@ pub enum JobKind {
 }
 
 impl JobKind {
-    /// Returns the name of the argument that indicates the job.
-    pub fn as_arg_name(&self) -> &'static str {
-        match self {
-            JobKind::ShowOnlineStatus => "ps",
-            JobKind::ShowPlayerMsgs => "msg",
-            JobKind::Unknown => "unknown",
-        }
-    }
-
     /// Returns the job kind from the argument name.
     pub fn from_arg_name(arg_name: &str) -> JobKind {
         match arg_name {
