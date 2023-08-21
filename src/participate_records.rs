@@ -6,9 +6,9 @@ pub enum ParticipateActionType {
     Leave,
 }
 
-pub struct PlayerParticipateRecord {
-    name: String,
-    action: ParticipateActionType,
+pub(crate) struct PlayerParticipateRecord {
+    pub(crate) name: String,
+    pub(crate) action: ParticipateActionType,
 }
 
 pub fn find_participate_records(raw_log: String) -> Vec<PlayerParticipateRecord> {
