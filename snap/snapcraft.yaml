@@ -1,0 +1,23 @@
+name: mclf
+version: '1.0.0'
+summary: A very simple minecraft log filter.
+description: |
+  Reading logs from Minecraft server is too hard.
+  For the sake of my eye health, I decided to write a small tool for the functions I use often.
+  Although many people have probably already done similar things, haha.
+
+grade: stable
+confinement: strict
+
+apps:
+  mclf:
+    command: mclf
+    plugs:
+      - home
+
+base: core22
+parts:
+  mclf:
+    plugin: rust
+    source: .
+    build-attributes: [ core22-step-dependencies ]
