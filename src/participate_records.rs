@@ -20,7 +20,10 @@ pub(crate) fn find_participate_records(raw_log: String) -> Vec<PlayerParticipate
 
     let mut player_actions: Vec<PlayerParticipateRecord> = Vec::new();
 
-    let pattern = format!(r"(.+?) ({}|{})", MINECRAFT_USER_JOIN, MINECRAFT_USER_LEAVE);
+    let pattern = format!(
+        r"\[Server thread/INFO\]:\s+(.*?)\s+({}|{})",
+        MINECRAFT_USER_JOIN, MINECRAFT_USER_LEAVE
+    );
     let re = Regex::new(&pattern).unwrap();
 
     for log in filtered_logs {
