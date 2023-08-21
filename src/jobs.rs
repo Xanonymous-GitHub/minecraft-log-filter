@@ -20,9 +20,9 @@ impl JobKind {
     }
 }
 
-pub struct Job {
-    kind: JobKind,
-    raw_log: String,
+pub(crate) struct Job {
+    pub(crate) kind: JobKind,
+    pub(crate) raw_log: String,
 }
 
 pub trait Executable {
