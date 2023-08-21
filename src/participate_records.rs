@@ -1,7 +1,7 @@
 use crate::log_keys::*;
 use regex::Regex;
 
-pub enum ParticipateActionType {
+pub(crate) enum ParticipateActionType {
     Join,
     Leave,
 }
@@ -11,7 +11,7 @@ pub(crate) struct PlayerParticipateRecord {
     pub(crate) action: ParticipateActionType,
 }
 
-pub fn find_participate_records(raw_log: String) -> Vec<PlayerParticipateRecord> {
+pub(crate) fn find_participate_records(raw_log: String) -> Vec<PlayerParticipateRecord> {
     let filtered_logs = raw_log
         .trim()
         .lines()

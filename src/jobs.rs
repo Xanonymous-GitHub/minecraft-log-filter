@@ -1,7 +1,8 @@
 use crate::show_help_msg::show_usage;
 use crate::show_online_status::show_online_status;
+
 /// [Job] indicates the type of job to be executed by the whole program.
-pub enum JobKind {
+pub(crate) enum JobKind {
     /// Use a command-line UI to show who is online.
     ShowOnlineStatus,
     /// Use a command-line UI to show the messages sent by players.
@@ -27,7 +28,7 @@ pub(crate) struct Job {
     pub(crate) raw_log: String,
 }
 
-pub trait Executable {
+pub(crate) trait Executable {
     fn execute(&self);
 }
 
