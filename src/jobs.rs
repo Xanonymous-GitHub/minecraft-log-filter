@@ -1,3 +1,5 @@
+use crate::show_help_msg::show_usage;
+use crate::show_online_status::show_online_status;
 /// [Job] indicates the type of job to be executed by the whole program.
 pub enum JobKind {
     /// Use a command-line UI to show who is online.
@@ -32,15 +34,11 @@ pub trait Executable {
 impl Executable for Job {
     fn execute(&self) {
         match self.kind {
-            JobKind::ShowOnlineStatus => {
-                todo!("Show online status");
-            }
+            JobKind::ShowOnlineStatus => show_online_status(self.raw_log.clone()),
             JobKind::ShowPlayerMsgs => {
                 todo!("Show player messages");
             }
-            JobKind::Unknown => {
-                todo!("Unknown job");
-            }
+            JobKind::Unknown => show_usage(),
         }
     }
 }
