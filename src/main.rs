@@ -6,9 +6,6 @@ mod jobs;
 mod log_keys;
 mod participate_records;
 
-fn show_usage() {
-    println!("Usage: Please give me your Minecraft server log");
-}
 
 fn read_all_args() -> Vec<String> {
     let args: Vec<String> = env::args().collect();
