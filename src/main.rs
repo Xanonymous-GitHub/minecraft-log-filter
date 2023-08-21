@@ -1,11 +1,10 @@
 use std::env;
 
-use crate::jobs::JobKind;
+use crate::jobs::{Executable, JobKind};
 
 mod jobs;
 mod log_keys;
 mod participate_records;
-
 mod show_help_msg;
 mod show_online_status;
 
@@ -24,13 +23,18 @@ fn read_all_args() -> Vec<String> {
 
 fn main() {
     let args: Vec<String> = read_all_args();
-    if args.is_empty() {
-        show_usage();
-        return;
-    }
 
-    let job_kind = JobKind::from_arg_name(&args[0]);
-    let job = jobs::Job::new(job_kind, &args[1]);
+    let (job_kind, raw_log) = if args.is_empty() {
+        (JobKind::Unknown, String::new())
+    } else {
+        // The index `1` is absolutely safe because we have checked the length of `args`.
+        (JobKind::from_arg_name(&args[0]), args[1].clone())
+    };
+
+    let job = jobs::Job {
+        kind: job_kind,
+        raw_log,
+    };
 
     job.execute();
 }
