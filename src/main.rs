@@ -11,7 +11,11 @@ mod show_online_status;
 
 fn read_all_args() -> Vec<String> {
     let args: Vec<String> = env::args().collect();
-    if args.len() < 2 {
+
+    // The first argument is the path of the executable file.
+    // The second argument is the name of the job.
+    // The third argument is the raw log.
+    if args.len() < 3 {
         Vec::new()
     } else {
         args[1..].to_vec()
