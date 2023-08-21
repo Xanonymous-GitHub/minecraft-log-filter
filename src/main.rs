@@ -6,6 +6,8 @@ mod jobs;
 mod log_keys;
 mod participate_records;
 
+mod show_help_msg;
+mod show_online_status;
 
 fn read_all_args() -> Vec<String> {
     let args: Vec<String> = env::args().collect();
