@@ -1,0 +1,10 @@
+[package]
+name = "minecraft-log-filter"
+version = "0.1.0"
+edition = "2021"
+description = "Filter Minecraft logs"
+authors = ["Xanonymous"]
+license = "MIT"
+
+[dependencies]
+regex = "1.9.3"
