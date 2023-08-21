@@ -8,6 +8,8 @@ pub(crate) enum JobKind {
     /// Use a command-line UI to show the messages sent by players.
     /// Players who are not online will be included.
     ShowPlayerMsgs,
+    /// Show the help message.
+    Help,
     /// Unknown job.
     Unknown,
 }
@@ -18,6 +20,7 @@ impl JobKind {
         match arg_name {
             "ps" => JobKind::ShowOnlineStatus,
             "msg" => JobKind::ShowPlayerMsgs,
+            "help" => JobKind::Help,
             _ => JobKind::Unknown,
         }
     }
@@ -39,6 +42,7 @@ impl Executable for Job {
             JobKind::ShowPlayerMsgs => {
                 todo!("Show player messages");
             }
+            JobKind::Help => show_usage(),
             JobKind::Unknown => show_usage(),
         }
     }
