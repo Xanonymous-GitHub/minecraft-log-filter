@@ -26,7 +26,7 @@ pub fn find_participate_records(raw_log: String) -> Vec<PlayerParticipateRecord>
     for log in filtered_logs {
         if let Some(captured) = re.captures(log) {
             let name = captured[1].trim().to_string();
-            let action = match captured[2] {
+            let action = match &captured[2] {
                 MINECRAFT_USER_JOIN => ParticipateActionType::Join,
                 MINECRAFT_USER_LEAVE => ParticipateActionType::Leave,
                 _ => panic!("#1 Unknown action type"),
