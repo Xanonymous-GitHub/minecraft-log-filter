@@ -1,21 +1,13 @@
+use std::env;
+
+use crate::jobs::JobKind;
+
 mod jobs;
 mod log_keys;
 mod participate_records;
 
-use crate::jobs::JobKind;
-use std::env;
-
 fn show_usage() {
     println!("Usage: Please give me your Minecraft server log");
-}
-
-fn decide_job() -> Option<String> {
-    let args: Vec<String> = env::args().collect();
-    if args.len() < 2 {
-        None
-    } else {
-        args.get(1).map(|s| s.to_string())
-    }
 }
 
 fn read_all_args() -> Vec<String> {
@@ -28,11 +20,14 @@ fn read_all_args() -> Vec<String> {
 }
 
 fn main() {
-    let args: Vec<String> = env::args().collect();
-    if args.len() < 2 {
+    let args: Vec<String> = read_all_args();
+    if args.is_empty() {
         show_usage();
         return;
     }
 
-    println!("Hello, {}!", args[1]);
+    let job_kind = JobKind::from_arg_name(&args[0]);
+    let job = jobs::Job::new(job_kind, &args[1]);
+
+    job.execute();
 }
