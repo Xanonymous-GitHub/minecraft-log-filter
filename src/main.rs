@@ -33,16 +33,6 @@ fn read_all_args() -> Vec<String> {
     // The third argument is the raw log.
     match args.len() {
         0 | 1 => Vec::new(),
-        2 => {
-            // get stdin from the user for receiving data from pipe command.
-            let raw_log = read_from_stdin();
-
-            if raw_log.is_empty() {
-                return Vec::new();
-            }
-
-            vec![args[1].clone(), raw_log]
-        }
         _ => args[1..].to_vec(),
     }
 }
@@ -50,11 +40,21 @@ fn read_all_args() -> Vec<String> {
 fn main() {
     let args: Vec<String> = read_all_args();
 
-    let (job_kind, raw_log) = if args.is_empty() {
-        (JobKind::Unknown, String::new())
+    let job_kind = if args.is_empty() {
+        JobKind::Unknown
     } else {
-        // The index `1` is absolutely safe because we have checked the length of `args`.
-        (JobKind::from_arg_name(&args[0]), args[1].clone())
+        JobKind::from_arg_name(&args[0])
+    };
+
+    let raw_log: String = match job_kind {
+        JobKind::ShowOnlineStatus => {
+            if args.len() >= 2 {
+                args[1].clone()
+            } else {
+                read_from_stdin()
+            }
+        }
+        _ => String::new(),
     };
 
     let job = jobs::Job {
