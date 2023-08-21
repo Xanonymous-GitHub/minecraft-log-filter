@@ -18,9 +18,18 @@ impl JobKind {
             JobKind::Unknown => "unknown",
         }
     }
+
+    /// Returns the job kind from the argument name.
+    pub fn from_arg_name(arg_name: &str) -> JobKind {
+        match arg_name {
+            "ps" => JobKind::ShowOnlineStatus,
+            "msg" => JobKind::ShowPlayerMsgs,
+            _ => JobKind::Unknown,
+        }
+    }
 }
 
-struct Job {
+pub struct Job {
     kind: JobKind,
     raw_log: String,
 }
