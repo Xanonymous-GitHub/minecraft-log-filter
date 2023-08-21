@@ -5,6 +5,8 @@ pub enum JobKind {
     /// Use a command-line UI to show the messages sent by players.
     /// Players who are not online will be included.
     ShowPlayerMsgs,
+    /// Unknown job.
+    Unknown,
 }
 
 impl JobKind {
@@ -13,6 +15,7 @@ impl JobKind {
         match self {
             JobKind::ShowOnlineStatus => "ps",
             JobKind::ShowPlayerMsgs => "msg",
+            JobKind::Unknown => "unknown",
         }
     }
 }
@@ -34,6 +37,9 @@ impl Executable for Job {
             }
             JobKind::ShowPlayerMsgs => {
                 todo!("Show player messages");
+            }
+            JobKind::Unknown => {
+                todo!("Unknown job");
             }
         }
     }
